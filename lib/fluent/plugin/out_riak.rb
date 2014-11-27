@@ -61,7 +61,7 @@ class RiakOutput < BufferedOutput
   def put_now(records, tags)
     if not records.empty? then
       today = Date.today
-      key = "#{today.to_s}-#{UUIDTools::UUID.random_create.to_s}"
+      key = "#{today.to_s}-#{UUIDTools::UUID.timestamp_create.to_s}"
       robj = Riak::RObject.new(@bucket, key)
       robj.raw_data = records.to_json
       robj.indexes['year_int'] << today.year
